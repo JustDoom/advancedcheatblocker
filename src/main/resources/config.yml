@@ -1,0 +1,4 @@
+#send-flag-message-to-console meaning logging flag messages. if the plugin detect lot's of hackers. It's will spam.
+#allow-bypass's permission is "acb.bypass"
+send-flag-messaage-to-console: true
+allow-bypass: false
