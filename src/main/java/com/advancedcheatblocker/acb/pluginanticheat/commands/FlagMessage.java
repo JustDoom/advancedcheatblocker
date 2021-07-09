@@ -22,6 +22,7 @@ public class FlagMessage implements CommandExecutor{
                     FlagUtil.FlagMsg.put( player ,a  );
                 }else{
                     FlagUtil.FlagMsg.put( player,true );
+                    player.sendMessage( "§7[§cACB§7]§9 Flag Message is enabled. " );
                 }
             }
         }
