@@ -9,4 +9,4 @@ Pros:
 - No False flags.
 Cons:
 - Not Good.
-- Bad Step Vheck.
+- Bad Step Check.
