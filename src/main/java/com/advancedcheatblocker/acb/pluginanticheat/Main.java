@@ -1,5 +1,6 @@
 package com.advancedcheatblocker.acb.pluginanticheat;
 
+import com.advancedcheatblocker.acb.pluginanticheat.checks.combats.KillAura;
 import com.advancedcheatblocker.acb.pluginanticheat.checks.movements.Fly;
 import com.advancedcheatblocker.acb.pluginanticheat.checks.movements.NoSlowDown;
 import com.advancedcheatblocker.acb.pluginanticheat.checks.movements.Speed;
@@ -44,6 +45,7 @@ public final class Main extends JavaPlugin implements Listener{
         register( new Speed() );
         register( new NoSlowDown() );
         register( new NoFall() );
+        register( new KillAura() );
         register( new Step() );
         register( new Timer() );
         //getCommand( "acbvl" ).setExecutor( new CheckVL() );
