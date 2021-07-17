@@ -2,7 +2,7 @@
 Blocking all of the hacker.
 It's can detect almost hackers. If it's have problem please report it.
 I still developing it. I will add strong checks soon. 
-Discord: soon.
+Discord: https://discordapp.com/invite/CWm29mnanM
 SpigotMC: https://www.spigotmc.org/resources/advanced-cheat-blocker.94084/
 
 
@@ -25,10 +25,9 @@ SpigotMC: https://www.spigotmc.org/resources/advanced-cheat-blocker.94084/
 
 # Pros: 
 - Free forever
-- Strong Fly Check,
+- Strong Fly/Speed Check,
 - Almost No False flags.
 
 
 # Cons:
-- Not Good.
-- Bad Speed Check.
+- Not Good than other premium or custom anti-cheats. ( but not weak )
