@@ -1,9 +1,0 @@
-name: AdvancedCheatBlocker
-version: ${project.version}
-main: com.advancedcheatblocker.acb.pluginanticheat.Main
-description: The Simple Anti Cheat. Easy to use..
-commands:
-  acb:
-    aliases: [advancedcheatblocker]
-  acbflag:
-    permission: acb.flagmessage
