@@ -1,5 +1,10 @@
 # advancedcheatblocker
-Blocking all of the hacker
+Blocking all of the hacker.
+It's can detect almost hackers. If it's have problem please report it.
+I still developing it. I will add strong checks soon. 
+Discord: soon.
+SpigotMC: https://www.spigotmc.org/resources/advanced-cheat-blocker.94084/
+
 
 # Q&A
 - Q: can I use your checks on my anti cheat?
