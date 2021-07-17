@@ -6,7 +6,6 @@ import com.advancedcheatblocker.acb.pluginanticheat.utils.PlayerUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 public class NoSlowDown implements Listener {
     @EventHandler
@@ -17,6 +16,8 @@ public class NoSlowDown implements Listener {
             }
             if(e.getPlayer().isSneaking() && e.getPlayer().isSprinting()){
                 FlagUtil.sendFlag( e.getPlayer() , CheckNames.NoSlowDown);
+                
+
             }
         }
     }

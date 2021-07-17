@@ -15,7 +15,8 @@ public class Speed implements Listener{
         Player p = event.getPlayer( );
         double x = p.getVelocity().getX();
         double z = p.getVelocity().getZ();
-        if(x >= 0.24 || z >= 0.24){
+        if(!GroundChecker.isOnGroundAround( event.getTo( ) ) )return;
+        if(x >= 0.24 || z >= 0.24) {
             FlagUtil.sendFlag( p,CheckNames.SpeedA);
         }
     }
@@ -32,7 +33,6 @@ public class Speed implements Listener{
             //p.sendMessage( "speed: "+speed+"\nWalkSpeed: "+speedWalk );
 
             if(e.getTo().getY() == e.getFrom().getY() && speed > speedWalk+0.5 && !p.isFlying()){
-                e.setTo(e.getFrom());
                 FlagUtil.sendFlag( p,CheckNames.SpeedB );
             }
         }

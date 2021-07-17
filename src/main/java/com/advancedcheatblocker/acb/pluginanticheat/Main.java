@@ -7,12 +7,15 @@ import com.advancedcheatblocker.acb.pluginanticheat.checks.movements.Speed;
 import com.advancedcheatblocker.acb.pluginanticheat.checks.movements.Step;
 import com.advancedcheatblocker.acb.pluginanticheat.checks.player.NoFall;
 import com.advancedcheatblocker.acb.pluginanticheat.checks.player.Timer;
+import com.advancedcheatblocker.acb.pluginanticheat.checks.worlds.Scaffold;
 import com.advancedcheatblocker.acb.pluginanticheat.commands.ACB;
 import com.advancedcheatblocker.acb.pluginanticheat.commands.CheckVL;
 import com.advancedcheatblocker.acb.pluginanticheat.commands.FlagMessage;
 import com.advancedcheatblocker.acb.pluginanticheat.utils.FlagUtil;
+import com.advancedcheatblocker.acb.pluginanticheat.utils.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -23,7 +26,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin implements Listener{
     public static boolean AntiCheatStatus = true;
-    public static String version = "b0.2";
+    public static String version = "b0.3.2";
     public static boolean allowbypass = false;
     public static boolean sendflagtoconsole = true;
     public static FileConfiguration config;
@@ -48,6 +51,7 @@ public final class Main extends JavaPlugin implements Listener{
         register( new KillAura() );
         register( new Step() );
         register( new Timer() );
+        //register( new Scaffold() ); Need to Fix
         //getCommand( "acbvl" ).setExecutor( new CheckVL() );
         /*
           acbvl:
@@ -58,6 +62,13 @@ public final class Main extends JavaPlugin implements Listener{
          */
         getCommand( "acbflag" ).setExecutor( new FlagMessage() );
         getCommand( "acb" ).setExecutor( new ACB() );
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event){
+        Player player = event.getPlayer();
+        FlagUtil.FlagMsg.remove( player );
+        PlayerUtil.BypassMap.remove( player );
     }
 
 //    @EventHandler

@@ -1,15 +1,121 @@
 package com.advancedcheatblocker.acb.pluginanticheat.checks.movements;
 
+import com.advancedcheatblocker.acb.pluginanticheat.Main;
 import com.advancedcheatblocker.acb.pluginanticheat.checks.CheckNames;
 import com.advancedcheatblocker.acb.pluginanticheat.utils.FlagUtil;
 import com.advancedcheatblocker.acb.pluginanticheat.utils.GroundChecker;
 import com.advancedcheatblocker.acb.pluginanticheat.utils.PlayerUtil;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.HashMap;
 
 public class Fly implements Listener{
+    HashMap<Player,Integer>FlyE = new HashMap<>();
+
+    @EventHandler
+    public void onMove5(PlayerMoveEvent event){
+        Player p = event.getPlayer();
+        if(!PlayerUtil.canBypass( p )){
+            Location from = event.getFrom();
+            Location to = event.getTo();
+            boolean isGround = GroundChecker.isOnGroundAround( from ) && GroundChecker.isOnGroundAround( to );
+            if(to.getY() == from.getY()){
+                if(!isGround){
+                    if(FlyE.get( p ) !=null){
+                        FlyE.put( p , FlyE.get( p ) + 1 );
+                        if(FlyE.get( p ) >= 5){
+                            FlyE.put( p , 0 );
+                            FlagUtil.sendFlag( p , CheckNames.FlyE );
+                        }
+                    }else{
+                        FlyE.put( p , 0 );
+                        new BukkitRunnable() {
+                            public void run() {
+                                FlyE.put( p, null );
+                            }
+                        }.runTaskLater( Main.plugin, 20L);
+                    }
+                }
+            }
+            if(to.getY()+0.15D < from.getY()){
+                if(p.isOnGround() && p.getVelocity().getY() >= 0.26){
+                    if(FlyE.get( p ) !=null){
+                        FlyE.put( p , FlyE.get( p ) + 1 );
+                        if(FlyE.get( p ) >= 5){
+                            FlyE.put( p , 0 );
+                            FlagUtil.sendFlag( p , CheckNames.FlyE );
+                        }
+                    }else{
+                        FlyE.put( p , 0 );
+                        new BukkitRunnable() {
+                            public void run() {
+                                FlyE.put( p, null );
+                            }
+                        }.runTaskLater( Main.plugin, 20L);
+                    }
+                }
+            }
+        }
+    }
+
+
+    @EventHandler
+    public void onMove4(PlayerMoveEvent event){
+        Player p = event.getPlayer();
+        if(!PlayerUtil.canBypass( p )){
+            boolean isAG = GroundChecker.isOnGroundAround( event.getTo( ) );
+            //boolean isMG = GroundChecker.isOnGroundMath( event.getTo().getY() ); not using rn for more reasons
+            boolean Ground = isAG;
+            if(!Ground){
+                if(!p.isOnGround()){
+                    double dist = event.getTo().distance( event.getFrom() );
+                    if(dist >= 0.05D && p.getVelocity().getY() >= 0.26){
+
+                        if(FlyE.get( p ) !=null){
+                            FlyE.put( p , FlyE.get( p ) + 1 );
+                            if(FlyE.get( p ) >= 5){
+                                FlyE.put( p , 0 );
+                                FlagUtil.sendFlag( p , CheckNames.FlyE );
+                            }
+                        }else{
+                            FlyE.put( p , 0 );
+                            new BukkitRunnable() {
+                                public void run() {
+                                    FlyE.put( p, null );
+                                }
+                            }.runTaskLater( Main.plugin, 20L);
+                        }
+
+
+                    }
+                }else {
+                    double dist = event.getTo().distance( event.getFrom() ) + 0.0987D;
+                    if(dist >= 0.05D && p.getVelocity().getY() >= 0.26){
+                        if(FlyE.get( p ) !=null){
+                            FlyE.put( p , FlyE.get( p ) + 1 );
+                            if(FlyE.get( p ) >= 5){
+                                FlyE.put( p , 0 );
+                                FlagUtil.sendFlag( p , CheckNames.FlyE );
+                            }
+                        }else{
+                            FlyE.put( p , 0 );
+                            new BukkitRunnable() {
+                                public void run() {
+                                    FlyE.put( p, null );
+                                }
+                            }.runTaskLater( Main.plugin, 20L);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     @EventHandler
     public void onMove(PlayerMoveEvent event){
         Player p = event.getPlayer( );
@@ -53,9 +159,6 @@ public class Fly implements Listener{
                 double data = toY - fromY;
                 if(!(data <= 6.65D)){
                     if(!GroundChecker.isOnGroundMath( toY ) && !GroundChecker.isOnGroundMath( fromY )){
-                        if(p.isOnGround()){
-
-                        }
                         FlagUtil.sendFlag( p, CheckNames.FlyC);
                     }
                 }
@@ -70,9 +173,6 @@ public class Fly implements Listener{
                             l = data - lastYDown;
                         }
                         if(!(lastYDown == 0)){
-                            if(l < 0.02D && p.isOnGround()){
-
-                            }
                             if(l < 0.02D && !GroundChecker.isOnGroundAround( event.getTo( ) )){
                                 FlagUtil.sendFlag( p, CheckNames.FlyD);
                             }
@@ -89,9 +189,6 @@ public class Fly implements Listener{
                             l = data - lastYDown;
                         }
                         if(!(lastYDown == 0)){
-                            if(l < 0.02D && p.isOnGround()){
-
-                            }
                             if(l < 0.02D){
                                 FlagUtil.sendFlag( p, CheckNames.FlyD);
                             }

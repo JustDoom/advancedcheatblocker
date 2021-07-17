@@ -14,8 +14,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 
 public class KillAura implements Listener{
-    double yaw = 0;
-    double pitch = 0;
+    public static double yaw = 0;
+    public static double pitch = 0;
     @EventHandler
     public void onMove(PlayerMoveEvent event){
         Player p = event.getPlayer();

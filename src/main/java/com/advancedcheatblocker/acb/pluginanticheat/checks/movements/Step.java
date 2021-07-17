@@ -11,6 +11,24 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffectType;
 
 public class Step implements Listener{
+
+    @EventHandler
+    public void onMove2(PlayerMoveEvent event){
+        Player p = event.getPlayer();
+        if(!PlayerUtil.canBypass( p )){
+            double y = event.getTo().getY() - event.getFrom().getY();
+            //p.sendMessage( "Ve: "+p.getVelocity().getY() +"\ny: "+y+"\n  ");
+            double ve = Math.abs( p.getVelocity().getY() );
+            if(ve >= 0.078){
+                if(event.getFrom().getY() < event.getTo().getY()){
+                    if(y >= 1.6){
+                        FlagUtil.sendFlag( p,CheckNames.StepA );
+                    }
+                }
+            }
+        }
+    }
+
     @EventHandler
     public void onMove(PlayerMoveEvent event){
         Player p = event.getPlayer();
@@ -21,8 +39,7 @@ public class Step implements Listener{
             double to = event.getTo().getY();
             if(!p.hasPotionEffect( PotionEffectType.JUMP )){
                 if( from+1.45 < to  && GroundChecker.isOnGroundMath( event.getTo( ).getY( ) )){
-                    if(yv > 0.13){
-                        event.setTo( event.getFrom() );
+                    if(yv >= 0.13){
                         FlagUtil.sendFlag( p,CheckNames.StepA );
                     }
                 }

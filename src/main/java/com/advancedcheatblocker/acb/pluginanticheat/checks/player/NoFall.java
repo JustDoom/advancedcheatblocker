@@ -15,12 +15,15 @@ public class NoFall implements Listener {
         Player p = event.getPlayer( );
         if ( ! PlayerUtil.canBypass( p ) ) {
             if(getFallDist(  p ) >= 2 ){
-                if(p.isOnGround() && !GroundChecker.isOnGroundAround( p.getLocation() ) ){
-                    FlagUtil.sendFlag( p, CheckNames.NoFallA);
+                if(event.getFrom().getY() > event.getTo().getY()){
+                    if(p.isOnGround() && !GroundChecker.isOnGroundAround( p.getLocation() ) ){
+                        FlagUtil.sendFlag( p, CheckNames.NoFallA);
+                    }
+                    if(p.isOnGround() && !GroundChecker.isOnGroundMath( p.getLocation().getY() )){
+                        FlagUtil.sendFlag( p, CheckNames.NoFallB);
+                    }
                 }
-                if(p.isOnGround() && !GroundChecker.isOnGroundMath( p.getLocation().getY() )){
-                    FlagUtil.sendFlag( p, CheckNames.NoFallB);
-                }
+
             }
         }
     }
