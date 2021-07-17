@@ -1,0 +1,51 @@
+#send-flag-message-to-console meaning logging flag messages. if the plugin detect lot's of hackers. It's will spam.
+#allow-bypass's permission is "acb.bypass"
+send-flag-messaage-to-console: true
+allow-bypass: false
+checks:
+  Fly:
+    A:
+      enable: true
+      teleportback: false
+    B:
+      enable: true
+      teleportback: false
+    C:
+      enable: true
+      teleportback: false
+    D:
+      enable: true
+      teleportback: false
+    E:
+      enable: true
+      teleportback: false
+  Speed:
+    A:
+      enable: true
+      teleportback: false
+    B:
+      enable: true
+      teleportback: false
+    C:
+      enable: true
+      teleportback: false
+  Step:
+    enable: true
+    teleportback: false
+  NoSlow:
+    enable: true
+    teleportback: false
+  InvalidMove:
+    enable: true
+    teleportback: false
+  NoFall:
+    enable: true
+  Scaffold:
+    enable: true
+    removeblock: false
+  Timer:
+    enable: true
+    teleportback: false
+  KillAura:
+    enable: true
+    removehit: false
