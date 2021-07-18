@@ -19,7 +19,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin implements Listener{
     public static boolean AntiCheatStatus = true;
-    public static String version = "b0.4.1";
+    public static String version = "b0.4.2";
+    public static boolean AutoPunish = false;
+    public static String AutoPunishCmd = "kick %%player%%";
+    public static int PunishViolationsCount = 150;
     public static boolean allowbypass = false;
     public static boolean sendflagtoconsole = true;
     public static FileConfiguration config;
@@ -61,6 +64,7 @@ public final class Main extends JavaPlugin implements Listener{
         Player player = event.getPlayer();
         FlagUtil.FlagMsg.remove( player );
         PlayerUtil.BypassMap.remove( player );
+        FlagUtil.ViolationsCount.remove( player );
     }
 
     public void ConfigLoad(){
@@ -70,6 +74,13 @@ public final class Main extends JavaPlugin implements Listener{
         ChecksManager.setStatus( CheckNames.FlyA , true/false ); Enable/Disable Check.
         ChecksManager.setAction( CheckNames.FlyA , true/false ); Enable/Disable TeleportBack/RemoveHit/RemoveBlock.
         */
+        AutoPunish = config.getBoolean("punish-settings.enable");
+        AutoPunishCmd = config.getString("punish-settings.command");
+        PunishViolationsCount = config.getInt( "punish-settings.punish-violations-count" );
+        if(!(PunishViolationsCount > 0)){
+            System.out.println( "[ERROR] Wrong Config. punish-violations-count | Value is not over than 0(minimum value is 1). so Value is set to 150." );
+            PunishViolationsCount = 150;
+        }
 
         ChecksManager.flya = config.getBoolean( "checks.Fly.A.enable" );
         ChecksManager.flyb = config.getBoolean( "checks.Fly.B.enable" );

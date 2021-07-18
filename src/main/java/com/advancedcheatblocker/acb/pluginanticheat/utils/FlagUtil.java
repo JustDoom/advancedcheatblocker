@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 public class FlagUtil{
     public static HashMap<Player,Boolean>FlagMsg = new HashMap<>();
+    public static HashMap<Player,Integer>ViolationsCount = new HashMap<>();
 
     //Please make it!
 
@@ -39,6 +40,18 @@ public class FlagUtil{
         for(Player ap:Bukkit.getOnlinePlayers()){
             if(FlagMsg.get( ap ) !=null && FlagMsg.get( ap)){
                 ap.sendMessage(  "§7[§cACB§7]§9 "+p.getName()+"§f has violated check §c"+cname );
+
+                if(Main.AutoPunish){
+                    if(ViolationsCount.get( p ) !=null){
+                        ViolationsCount.put( p , ViolationsCount.get( p ) + 1 );
+                    }else {
+                        ViolationsCount.put( p , 0 );
+                    }
+                    if(ViolationsCount.get(  p  ) !=null && ViolationsCount.get( p ) >= Main.PunishViolationsCount){
+                        Bukkit.dispatchCommand( Bukkit.getConsoleSender() , Main.AutoPunishCmd.replace( "%%player%%" , p.getName() ) );
+                    }
+                }
+
             }
         }
     }

@@ -2,6 +2,10 @@
 #allow-bypass's permission is "acb.bypass"
 send-flag-messaage-to-console: true
 allow-bypass: false
+punish-settings:
+  enable: false
+  punish-violations-count: 150
+  command: 'minecraft:kick %%player%% hacking'
 checks:
   Fly:
     A:
