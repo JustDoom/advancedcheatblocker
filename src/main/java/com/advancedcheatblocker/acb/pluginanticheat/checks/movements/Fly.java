@@ -7,6 +7,7 @@ import com.advancedcheatblocker.acb.pluginanticheat.utils.FlagUtil;
 import com.advancedcheatblocker.acb.pluginanticheat.utils.GroundChecker;
 import com.advancedcheatblocker.acb.pluginanticheat.utils.PlayerUtil;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +19,25 @@ import java.util.HashMap;
 public class Fly implements Listener{
     HashMap<Player,Integer>FlyE = new HashMap<>();
 
+    @EventHandler
+    public void onMoveH(PlayerMoveEvent e){
+        Player p = e.getPlayer();
+        if(!PlayerUtil.canBypass( p )){
+            if(!GroundChecker.isOnGroundMath( e.getTo().getY() )
+                    && !GroundChecker.isOnGroundMath( e.getFrom().getY() )
+                    && p.isOnGround()){
+                double dist = e.getTo().distance( e.getFrom() ) ;
+
+                if(dist > 0.3 && (e.getFrom().getY() == e.getTo().getY() || e.getFrom().getY()+0.2 > e.getTo().getY() ) && p.getVelocity().getY() > 0.01) {
+                    FlagUtil.sendFlag( p , CheckNames.FlyE );
+                    if(ChecksManager.flyeFlag){
+                        e.setTo( e.getFrom( ) );
+                    }
+                }
+
+            }
+        }
+    }
     @EventHandler
     public void onMove5(PlayerMoveEvent event){
         Player p = event.getPlayer();
@@ -71,6 +91,41 @@ public class Fly implements Listener{
         }
     }
 
+    @EventHandler
+    public void onMoveNew2(PlayerMoveEvent event){
+
+        if(!PlayerUtil.canBypass( event.getPlayer() ) && ChecksManager.flye){
+            boolean isFly =
+                    event.getPlayer( ).isOnGround()
+                            && event.getPlayer().getWorld().getBlockAt(event.getPlayer().getLocation().subtract(0, 1, 0)).getType() == Material.AIR
+                            && event.getPlayer().getWorld().getBlockAt(event.getPlayer().getLocation().subtract(0, 2, 0)).getType() == Material.AIR
+                            && !(GroundChecker.isOnGroundMath( event.getTo().getY() ) && GroundChecker.isGroundAround2( event.getTo( ) ))
+                            && !event.getPlayer().isFlying()
+                            && event.getTo() != event.getFrom()
+                            && event.getTo().distance( event.getFrom( ) ) > 0.19
+                            && (event.getTo().getY() == event.getFrom( ).getY() || event.getTo().getY()+0.6 > event.getFrom().getY() || event.getTo().getY()+ 0.4 < event.getFrom().getY() );
+            if(isFly){
+                Player p = event.getPlayer( );
+                if(FlyE.get( p ) !=null){
+                    FlyE.put( p , FlyE.get( p ) + 3 );
+                    if(FlyE.get( p ) >= 5){
+                        FlyE.put( p , 0 );
+                        FlagUtil.sendFlag( p , CheckNames.FlyE );
+                        if(ChecksManager.flyeFlag){
+                            event.setTo( event.getFrom( ));
+                        }
+                    }
+                }else{
+                    FlyE.put( p , 0 );
+                    new BukkitRunnable() {
+                        public void run() {
+                            FlyE.put( p, null );
+                        }
+                    }.runTaskLater( Main.plugin, 20L);
+                }
+            }
+        }
+    }
 
     @EventHandler
     public void onMove4(PlayerMoveEvent event){
