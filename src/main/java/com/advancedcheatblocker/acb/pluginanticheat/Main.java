@@ -19,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin implements Listener{
     public static boolean AntiCheatStatus = true;
-    public static String version = "b0.4";
+    public static String version = "b0.4.1";
     public static boolean allowbypass = false;
     public static boolean sendflagtoconsole = true;
     public static FileConfiguration config;

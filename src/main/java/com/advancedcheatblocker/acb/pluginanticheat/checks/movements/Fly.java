@@ -138,7 +138,8 @@ public class Fly implements Listener{
             double v = Math.abs( p.getVelocity().getY() );
             if(p.getVehicle() == null ){
                 if(v >= 0.26 && event.getFrom().getY() == event.getTo( ).getY() &&
-                        !GroundChecker.isOnGroundAround( event.getTo( ) ) && !GroundChecker.isOnGroundMath( event.getTo( ).getY() )){
+                        !GroundChecker.isOnGroundAround( event.getTo( ) ) ){
+                    //&& !GroundChecker.isOnGroundMath( event.getTo( ).getY() ) <= delete it why = bad for ground check
                     FlagUtil.sendFlag( p, CheckNames.FlyA);
                     if(ChecksManager.flyaFlag){
                         event.setTo( event.getFrom() );
@@ -191,7 +192,7 @@ public class Fly implements Listener{
                 }
             }else if( toY < fromY){
                 double data = toY - fromY;
-                if(!GroundChecker.isOnGroundMath( toY ) && !GroundChecker.isOnGroundMath( fromY )  && !p.isFlying()){
+                if(!GroundChecker.isOnGroundMath( toY ) && !GroundChecker.isOnGroundMath( fromY )  && !p.isFlying() && !GroundChecker.isStandingBoat( p )){
                     if(data <= 0.124D){
                         double l = 0;
                         if(lastYDown > data){
@@ -212,7 +213,7 @@ public class Fly implements Listener{
                         }
                     }
                     lastYDown = data;
-                }else if(!GroundChecker.isOnGroundAround( event.getTo( ) ) && !GroundChecker.isOnGroundAround( event.getFrom( ) )  && !p.isFlying()){
+                }else if(!GroundChecker.isOnGroundAround( event.getTo( ) ) && !GroundChecker.isOnGroundAround( event.getFrom( ) )  && !p.isFlying() && !GroundChecker.isStandingBoat( p )){
                     if(data <= 0.124D){
                         double l = 0;
                         if(lastYDown > data){
