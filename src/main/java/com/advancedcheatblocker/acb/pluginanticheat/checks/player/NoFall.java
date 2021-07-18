@@ -17,7 +17,7 @@ public class NoFall implements Listener {
         if ( ! PlayerUtil.canBypass( p ) && ChecksManager.nofall ) {
             if(getFallDist(  p ) >= 2 ){
                 if(event.getFrom().getY() > event.getTo().getY()){
-                    if(p.isOnGround() && !GroundChecker.isOnGroundMath( p.getLocation().getY() )){
+                    if(p.isOnGround() && !GroundChecker.isOnGroundMath( event.getTo( ).getY() )){
                         FlagUtil.sendFlag( p, CheckNames.NoFall);
                     }
                 }

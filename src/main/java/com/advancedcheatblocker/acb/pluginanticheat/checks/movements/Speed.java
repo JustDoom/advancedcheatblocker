@@ -5,6 +5,8 @@ import com.advancedcheatblocker.acb.pluginanticheat.utils.ChecksManager;
 import com.advancedcheatblocker.acb.pluginanticheat.utils.FlagUtil;
 import com.advancedcheatblocker.acb.pluginanticheat.utils.GroundChecker;
 import com.advancedcheatblocker.acb.pluginanticheat.utils.PlayerUtil;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -49,8 +51,9 @@ public class Speed implements Listener{
         if(!PlayerUtil.canBypass( p ) && ChecksManager.speeda){
             double x = p.getVelocity().getX();
             double z = p.getVelocity().getZ();
-            if(!GroundChecker.isOnGroundAround( event.getTo( ) ) )return;
-            if(x >= 0.24 || z >= 0.24) {
+            if(!GroundChecker.isGroundAround2( event.getTo( ) ) )return;
+            Location StandingBlock = new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY() - 1.0D, p.getLocation().getZ());
+            if((x >= 0.24 || z >= 0.24) && !(StandingBlock.getBlock().getType() == Material.ICE || StandingBlock.getBlock().getType().getData().getName().contains("ICE"))) {
                 FlagUtil.sendFlag( p,CheckNames.SpeedA);
                 if(ChecksManager.speedaFlag){
                     event.setTo( event.getFrom() );

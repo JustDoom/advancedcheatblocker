@@ -185,7 +185,8 @@ public class Fly implements Listener{
             }
         }
     }
-
+    HashMap<Player,Integer>FlyA = new HashMap<>();
+    HashMap<Player,Integer>FlyB = new HashMap<>();
     @EventHandler
     public void onMove(PlayerMoveEvent event){
         Player p = event.getPlayer( );
@@ -195,10 +196,26 @@ public class Fly implements Listener{
                 if(v >= 0.26 && event.getFrom().getY() == event.getTo( ).getY() &&
                         !GroundChecker.isOnGroundAround( event.getTo( ) ) ){
                     //&& !GroundChecker.isOnGroundMath( event.getTo( ).getY() ) <= delete it why = bad for ground check
-                    FlagUtil.sendFlag( p, CheckNames.FlyA);
-                    if(ChecksManager.flyaFlag){
-                        event.setTo( event.getFrom() );
+
+                    if(FlyA.get( p ) !=null){
+                        FlyA.put( p , FlyA.get( p ) + 1 );
+                        if(FlyA.get( p ) >= 5){
+                            FlyA.put( p , 0 );
+                            FlagUtil.sendFlag( p, CheckNames.FlyA);
+                            if(ChecksManager.flyaFlag){
+                                event.setTo( event.getFrom() );
+                            }
+                        }
+                    }else{
+                        FlyA.put( p , 0 );
+                        new BukkitRunnable() {
+                            public void run() {
+                                FlyA.put( p, null );
+                            }
+                        }.runTaskLater( Main.plugin, 20L);
                     }
+
+
                 }
             }
         }
@@ -214,10 +231,25 @@ public class Fly implements Listener{
                         !GroundChecker.isOnGroundAround( event.getTo( ) ) && !GroundChecker.isOnGroundMath( event.getTo( ).getY() ) ){
                     if(event.getFrom().getY() > event.getTo( ).getY() && !p.isFlying()){
                         if(y < 0.15D){
-                            FlagUtil.sendFlag( p, CheckNames.FlyB);
-                            if(ChecksManager.flybFlag){
-                                event.setTo( event.getFrom() );
+
+                            if(FlyB.get( p ) !=null){
+                                FlyB.put( p , FlyB.get( p ) + 1 );
+                                if(FlyB.get( p ) >= 5){
+                                    FlyB.put( p , 0 );
+                                    FlagUtil.sendFlag( p, CheckNames.FlyB);
+                                    if(ChecksManager.flybFlag){
+                                        event.setTo( event.getFrom() );
+                                    }
+                                }
+                            }else{
+                                FlyB.put( p , 0 );
+                                new BukkitRunnable() {
+                                    public void run() {
+                                        FlyB.put( p, null );
+                                    }
+                                }.runTaskLater( Main.plugin, 20L);
                             }
+
                         }
                     }
 

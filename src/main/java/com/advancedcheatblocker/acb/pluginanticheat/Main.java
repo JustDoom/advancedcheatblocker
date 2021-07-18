@@ -19,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin implements Listener{
     public static boolean AntiCheatStatus = true;
-    public static String version = "b0.4.3";
+    public static String version = "b0.4.5";
     public static boolean AutoPunish = false;
     public static String AutoPunishCmd = "kick %%player%%";
     public static int PunishViolationsCount = 150;
