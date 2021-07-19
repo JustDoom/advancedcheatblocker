@@ -23,6 +23,18 @@ checks:
     E:
       enable: true
       teleportback: false
+    F:
+      enable: true
+      teleportback: false
+    G:
+      enable: true
+      teleportback: false
+    H:
+      enable: true
+      teleportback: false
+    I:
+      enable: true
+      teleportback: false
   Speed:
     A:
       enable: true

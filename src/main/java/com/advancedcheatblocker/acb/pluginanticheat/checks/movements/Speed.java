@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 public class Speed implements Listener{
     private double lastDisc;
     private boolean lastOnGround;
+
     @EventHandler
     public void onMoveSpeed(PlayerMoveEvent event){
         Player p = event.getPlayer();

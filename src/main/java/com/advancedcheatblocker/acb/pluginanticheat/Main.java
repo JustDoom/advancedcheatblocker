@@ -19,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin implements Listener{
     public static boolean AntiCheatStatus = true;
-    public static String version = "b0.4.5";
+    public static String version = "b0.5";
     public static boolean AutoPunish = false;
     public static String AutoPunishCmd = "kick %%player%%";
     public static int PunishViolationsCount = 150;
@@ -97,6 +97,11 @@ public final class Main extends JavaPlugin implements Listener{
         ChecksManager.scaffold = config.getBoolean( "checks.Scaffold.enable" );
         ChecksManager.timer = config.getBoolean( "checks.Timer.enable" );
         ChecksManager.killaura = config.getBoolean( "checks.KillAura.enable" );
+        ChecksManager.flyf = config.getBoolean( "checks.Fly.F.enable" );
+        ChecksManager.flyg = config.getBoolean( "checks.Fly.G.enable" );
+        ChecksManager.flyh = config.getBoolean( "checks.Fly.H.enable" );
+        ChecksManager.flyi = config.getBoolean( "checks.Fly.I.enable" );
+
 
         ChecksManager.flyaFlag = config.getBoolean( "checks.Fly.A.teleportback" );
         ChecksManager.flybFlag = config.getBoolean( "checks.Fly.B.teleportback" );
@@ -112,6 +117,10 @@ public final class Main extends JavaPlugin implements Listener{
         ChecksManager.scaffoldFlag = config.getBoolean( "checks.Scaffold.removeblock" );
         ChecksManager.timerFlag = config.getBoolean( "checks.Timer.teleportback" );
         ChecksManager.killauraFlag = config.getBoolean( "checks.KillAura.removehit" );
+        ChecksManager.flyfFlag = config.getBoolean( "checks.Fly.F.teleportback" );
+        ChecksManager.flygFlag = config.getBoolean( "checks.Fly.G.teleportback" );
+        ChecksManager.flyhFlag = config.getBoolean( "checks.Fly.H.teleportback" );
+        ChecksManager.flyiFlag = config.getBoolean( "checks.Fly.I.teleportback" );
     }
     public void register(Listener listener){
         getServer().getPluginManager().registerEvents( listener , this );

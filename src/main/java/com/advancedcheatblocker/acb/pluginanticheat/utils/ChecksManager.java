@@ -3,8 +3,8 @@ package com.advancedcheatblocker.acb.pluginanticheat.utils;
 import com.advancedcheatblocker.acb.pluginanticheat.checks.CheckNames;
 
 public class ChecksManager{
-    public static boolean flya,flyb,flyc,flyd,flye,speeda,speedb,speedc,step,noslow,nofall,invalidmove,timer,scaffold,killaura = true;
-    public static boolean flyaFlag,flybFlag,flycFlag,flydFlag,flyeFlag,speedaFlag,speedbFlag,speedcFlag,stepFlag,noslowFlag,invalidmoveFlag,timerFlag,scaffoldFlag,killauraFlag = false;
+    public static boolean flya,flyb,flyc,flyd,flye,speeda,speedb,speedc,step,noslow,nofall,invalidmove,timer,scaffold,killaura,flyf,flyg,flyh,flyi = true;
+    public static boolean flyaFlag,flybFlag,flycFlag,flydFlag,flyeFlag,speedaFlag,speedbFlag,speedcFlag,stepFlag,noslowFlag,invalidmoveFlag,timerFlag,scaffoldFlag,killauraFlag,flyfFlag,flygFlag,flyhFlag,flyiFlag = false;
     @Deprecated
     public static void setAction(CheckNames check,boolean data){
         switch (check){
@@ -49,6 +49,18 @@ public class ChecksManager{
                 break;
             case KillAura:
                 killauraFlag = data;
+                break;
+            case FlyF:
+                flyfFlag = data;
+                break;
+            case FlyG:
+                flygFlag = data;
+                break;
+            case FlyH:
+                flyhFlag = data;
+                break;
+            case FlyI:
+                flyiFlag = data;
                 break;
         }
     }
@@ -100,6 +112,18 @@ public class ChecksManager{
                 break;
             case KillAura:
                 killaura = data;
+                break;
+            case FlyF:
+                flyf = data;
+                break;
+            case FlyG:
+                flyg = data;
+                break;
+            case FlyH:
+                flyh = data;
+                break;
+            case FlyI:
+                flyi = data;
                 break;
         }
     }

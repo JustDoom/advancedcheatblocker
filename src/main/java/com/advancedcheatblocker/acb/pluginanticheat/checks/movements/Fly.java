@@ -17,20 +17,43 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 
 public class Fly implements Listener{
+
+
+
+
+    @EventHandler
+    public void onMove2(PlayerMoveEvent e){
+        Player p = e.getPlayer();
+        if(!PlayerUtil.canBypass( p ) && ChecksManager.flyi){
+            Location to= e.getTo();
+            Location from = e.getFrom();
+            double yDiff = to.getY() - from.getY();
+            double yResult = yDiff - p.getVelocity().getY() ;
+            if(p.isFlying() && GroundChecker.isGroundAround2( to  ))return;
+            if(yResult >= 0.419 && Math.abs( p.getVelocity().getY() ) > 0.419) {
+                FlagUtil.sendFlag( p , CheckNames.FlyI );
+                if(ChecksManager.flyi){
+                    e.setTo(from);
+                }
+            }
+        }
+    }
+
+
     HashMap<Player,Integer>FlyE = new HashMap<>();
 
     @EventHandler
     public void onMoveH(PlayerMoveEvent e){
         Player p = e.getPlayer();
-        if(!PlayerUtil.canBypass( p )){
+        if(!PlayerUtil.canBypass( p ) && ChecksManager.flyh){
             if(!GroundChecker.isOnGroundMath( e.getTo().getY() )
                     && !GroundChecker.isOnGroundMath( e.getFrom().getY() )
                     && p.isOnGround()){
                 double dist = e.getTo().distance( e.getFrom() ) ;
 
                 if(dist > 0.3 && (e.getFrom().getY() == e.getTo().getY() || e.getFrom().getY()+0.2 > e.getTo().getY() ) && p.getVelocity().getY() > 0.01) {
-                    FlagUtil.sendFlag( p , CheckNames.FlyE );
-                    if(ChecksManager.flyeFlag){
+                    FlagUtil.sendFlag( p , CheckNames.FlyH );
+                    if(ChecksManager.flyhFlag){
                         e.setTo( e.getFrom( ) );
                     }
                 }
@@ -41,7 +64,7 @@ public class Fly implements Listener{
     @EventHandler
     public void onMove5(PlayerMoveEvent event){
         Player p = event.getPlayer();
-        if(!PlayerUtil.canBypass( p ) && ChecksManager.flye){
+        if(!PlayerUtil.canBypass( p ) && ChecksManager.flyg){
             Location from = event.getFrom();
             Location to = event.getTo();
             //boolean isGround = GroundChecker.isOnGroundAround( from ) && GroundChecker.isOnGroundAround( to );
@@ -52,8 +75,8 @@ public class Fly implements Listener{
                         FlyE.put( p , FlyE.get( p ) + 1 );
                         if(FlyE.get( p ) >= 5){
                             FlyE.put( p , 0 );
-                            FlagUtil.sendFlag( p , CheckNames.FlyE );
-                            if(ChecksManager.flyeFlag){
+                            FlagUtil.sendFlag( p , CheckNames.FlyG );
+                            if(ChecksManager.flygFlag){
                                 event.setTo( from );
                             }
                         }
@@ -73,8 +96,8 @@ public class Fly implements Listener{
                         FlyE.put( p , FlyE.get( p ) + 1 );
                         if(FlyE.get( p ) >= 5){
                             FlyE.put( p , 0 );
-                            FlagUtil.sendFlag( p , CheckNames.FlyE );
-                            if(ChecksManager.flyeFlag){
+                            FlagUtil.sendFlag( p , CheckNames.FlyG );
+                            if(ChecksManager.flygFlag){
                                 event.setTo( from );
                             }
                         }
@@ -94,7 +117,7 @@ public class Fly implements Listener{
     @EventHandler
     public void onMoveNew2(PlayerMoveEvent event){
 
-        if(!PlayerUtil.canBypass( event.getPlayer() ) && ChecksManager.flye){
+        if(!PlayerUtil.canBypass( event.getPlayer() ) && ChecksManager.flyf){
             boolean isFly =
                     event.getPlayer( ).isOnGround()
                             && event.getPlayer().getWorld().getBlockAt(event.getPlayer().getLocation().subtract(0, 1, 0)).getType() == Material.AIR
@@ -110,8 +133,8 @@ public class Fly implements Listener{
                     FlyE.put( p , FlyE.get( p ) + 3 );
                     if(FlyE.get( p ) >= 5){
                         FlyE.put( p , 0 );
-                        FlagUtil.sendFlag( p , CheckNames.FlyE );
-                        if(ChecksManager.flyeFlag){
+                        FlagUtil.sendFlag( p , CheckNames.FlyF );
+                        if(ChecksManager.flyfFlag){
                             event.setTo( event.getFrom( ));
                         }
                     }
