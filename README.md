@@ -1,6 +1,6 @@
 # advancedcheatblocker
 Blocking all of the hacker.
-It's can detect almost hackers. If it's have problem please report it.
+It can almost detect hackers, right now it only detects legit players. If it's have problem please report it.
 I still developing it. I will add strong checks soon. 
 Discord: https://discordapp.com/invite/CWm29mnanM
 SpigotMC: https://www.spigotmc.org/resources/advanced-cheat-blocker.94084/
