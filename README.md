@@ -1,3 +1,6 @@
+# note
+I am not the dev of this, I forked it and the original dev must of deleted/privated it or something
+
 # advancedcheatblocker
 Blocking all of the hacker.
 It can almost detect hackers, right now it only detects legit players. If it's have problem please report it.
